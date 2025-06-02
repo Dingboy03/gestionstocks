@@ -2,6 +2,7 @@ package com.monentreprise.gestionstocks.modele;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Commande {
     private int idCommande;
@@ -14,7 +15,7 @@ public class Commande {
         this.idCommande = idCommande;
         this.nomClient = nomClient;
         this.dateCommande = dateCommande;
-        this.lignes = lignes;
+        this.lignes = new ArrayList<>();
     }
     public int getIdCommande() {
         return idCommande;

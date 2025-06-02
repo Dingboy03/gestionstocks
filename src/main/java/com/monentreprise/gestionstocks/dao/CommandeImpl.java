@@ -57,7 +57,7 @@ public class CommandeImpl implements CommandeDAO {
 
     @Override
     public Commande findById(int idCommande) {
-        String sql = "SELECT * FROM COMMANDE WHERE idCommande = ?";
+        String sql = "SELECT idCommande, nomClient, dateCommande FROM COMMANDE WHERE idCommande = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, idCommande);
             ResultSet resultSet = statement.executeQuery();
@@ -65,7 +65,7 @@ public class CommandeImpl implements CommandeDAO {
                 return new Commande(
                     resultSet.getInt("idCommande"),
                     resultSet.getString("nomClient"),
-                    resultSet.getDate("dateCommande").toLocalDate(), 
+                    resultSet.getDate("dateCommande").toLocalDate(),
                     new ArrayList<>() // chargement des lignes à faire plus tard
                 );
             }
@@ -78,7 +78,7 @@ public class CommandeImpl implements CommandeDAO {
     @Override
     public List<Commande> findAll() {
         List<Commande> commandes = new ArrayList<>();
-        String sql = "SELECT * FROM COMMANDE";
+        String sql = "SELECT idCommande, nomClient, dateCommande FROM COMMANDE";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -98,7 +98,7 @@ public class CommandeImpl implements CommandeDAO {
     @Override
     public List<Commande> findByNomClient(int idClient) {
         List<Commande> commandes = new ArrayList<>();
-        String sql = "SELECT * FROM COMMANDE WHERE idClient = ?";
+        String sql = "SELECT idCommande, nomClient, dateCommande FROM COMMANDE WHERE idClient = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, idClient);
             ResultSet resultSet = statement.executeQuery();

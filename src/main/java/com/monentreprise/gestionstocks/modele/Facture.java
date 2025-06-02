@@ -3,7 +3,7 @@ package com.monentreprise.gestionstocks.modele;
 public class Facture {
     private int id;
     private int idCommande;
-    private double montantTotal;
+    private final double montantTotal;
 
     // Constructeurs, getters, setters
     public Facture(int id, int idCommande, double montantTotal) {
