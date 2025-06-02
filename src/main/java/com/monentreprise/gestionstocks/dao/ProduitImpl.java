@@ -1,5 +1,6 @@
 package com.monentreprise.gestionstocks.dao;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ public class ProduitImpl implements ProduitDAO {
 
     @Override
     public Produit findById(int idProduit) {
-        String sql = "SELECT * FROM produit WHERE idProduit = ?";
+        String sql = "SELECT idProduit, nom, categorie, prixUnitaire, quantiteStock FROM produit WHERE idProduit = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, idProduit);
             ResultSet resultSet = statement.executeQuery();
@@ -33,7 +34,7 @@ public class ProduitImpl implements ProduitDAO {
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erreur lors de la récupération des produits: " + e.getMessage());
         }
         return null;
     }
@@ -41,7 +42,7 @@ public class ProduitImpl implements ProduitDAO {
     @Override
     public List<Produit> findAll() {
         List<Produit> produits = new ArrayList<>();
-        String sql = "SELECT * FROM produit";
+        String sql = "SELECT idProduit, nom, categorie, prixUnitaire, quantiteStock FROM produit";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -54,7 +55,7 @@ public class ProduitImpl implements ProduitDAO {
                 ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+           System.out.println("Erreur lors de la récupération des produits : " + e.getMessage());
         }
         return produits;
     }
@@ -81,7 +82,7 @@ public class ProduitImpl implements ProduitDAO {
                 ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erreur lors de la récupération des produits : " + e.getMessage());
         }
 
         return produits;
@@ -89,7 +90,7 @@ public class ProduitImpl implements ProduitDAO {
 
     @Override
     public void ajouter(Produit produit){
-        String sql = "ISERT INTO PRODUIT (nom, categorie, prixUnitaire, quantiteStock) VALUES (?,?, ?, ?)";
+        String sql = "INSERT INTO PRODUIT (nom, categorie, prixUnitaire, quantiteStock) VALUES (?,?, ?, ?)";
         try(PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1, produit.getNom());
             statement.setString(2, produit.getCategorie());
@@ -97,7 +98,7 @@ public class ProduitImpl implements ProduitDAO {
             statement.setInt(4, produit.getQuantiteStock());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erreur lors de la récupération des produits : " + e.getMessage());
         }
            
     }
@@ -113,7 +114,7 @@ public class ProduitImpl implements ProduitDAO {
             statement.setInt(5, produit.getIdProduit());
             statement.executeUpdate();
         }  catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erreur lors de la récupération des produits : " + e.getMessage());
         }
     }
 
@@ -124,7 +125,7 @@ public class ProduitImpl implements ProduitDAO {
             statement.setInt(1, idProduit);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erreur lors de la récupération des produits : " + e.getMessage());
         }
     }
 }
